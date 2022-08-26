@@ -46,22 +46,18 @@ public class Vaisseau {
         else {
             System.out.println("  * Planete courante : Terre");
         }
-        //refaire inventaire
+
         System.out.println("  * Inventaire : " + toStringInventaire());
         System.out.println();
     }
 
     public SystemePlanetaire changerPlanete() {
         SystemePlanetaire prochaineDestination;
-        if {
+        if (journalDeBord.size() != 8) {
             do {
                 prochaineDestination = SystemePlanetaire.values()[(int) (Math.random() * 8)];
             } while (journalDeBord.contains(prochaineDestination));
 
-            /*for (int i = 0; i < 8; i++){
-                if (inventaire[i] == null)
-                    inventaire[i] = prochaineDestination.
-            }*/
             System.out.println("Vous vous rendez sur " + prochaineDestination.name());
             if (carburantRestant >= prochaineDestination.getFuelrequis()) {
                 planeteCourante = prochaineDestination;
@@ -74,14 +70,40 @@ public class Vaisseau {
                 return null;
             }
         }
+        else{
+            System.out.println("Vous avez explore tout le systeme disponible.");
+            carburantRestant = 0;
+            return null;
+        }
     }
 
     public void revenirArriere() {
-        if(!journalDeBord.empty()){
+        if(!(journalDeBord.size() <= 1)){
             SystemePlanetaire planeteRevenu = journalDeBord.pop();
+            carburantRestant += planeteRevenu.getFuelrequis();
+            for (int i = 7; i > -1; i--) {
+                if (inventaire[i] != null){
+                    inventaire[i] = null;
+                    break;
+                }
+            }
             planeteCourante = journalDeBord.peek();
             System.out.println("Annulation du voyage en cours...");
             System.out.println("Vous etes de retour sur : " + planeteCourante.name());
+            System.out.println();
+        }
+        else if (journalDeBord.size() == 1){
+            SystemePlanetaire planeteRevenu = journalDeBord.pop();
+            carburantRestant += planeteRevenu.getFuelrequis();
+            for (int i = 7; i > -1; i--) {
+                if (inventaire[i] != null){
+                    inventaire[i] = null;
+                    break;
+                }
+            }
+            planeteCourante = null;
+            System.out.println("Annulation du voyage en cours...");
+            System.out.println("Vous etes de retour sur : Terre" );
             System.out.println();
         }
         else{
@@ -106,9 +128,11 @@ public class Vaisseau {
     public void enleverObjet(int rang){
         for (int i = rang; i < 8; i++) {
             inventaire[i] = null;
-            if (inventaire[i + 1] != null){
-                inventaire[i] = inventaire[i + 1];
-                inventaire[i + 1] = null;
+            if(i != 7) {
+                if (inventaire[i + 1] != null) {
+                    inventaire[i] = inventaire[i + 1];
+                    inventaire[i + 1] = null;
+                }
             }
         }
     }
@@ -153,19 +177,10 @@ public class Vaisseau {
         return inventaire;
     }
 
-    public void setInventaire(Item[] inventaire) {
-        this.inventaire = inventaire;
-    }
+
 
     public Stack<SystemePlanetaire> getJournalDeBord() {
         return journalDeBord;
     }
 
-    public SystemePlanetaire getPlaneteCourante() {
-        return planeteCourante;
-    }
-
-    public void setPlaneteCourante(SystemePlanetaire planeteCourante) {
-        this.planeteCourante = planeteCourante;
-    }
 }

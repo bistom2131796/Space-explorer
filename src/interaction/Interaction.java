@@ -26,6 +26,10 @@ public class Interaction {
             case '2':
                 try{
                     vaisseau.changerPlanete().explorer(vaisseau);
+                    if((Math.random() * 3) + 1 > 2 ){
+                        Pirate pirate = new Pirate();
+                        Combat.combattre(vaisseau, pirate, sc);
+                    }
                 }
                 catch (Exception e) {
                     gameOver(vaisseau);
@@ -40,10 +44,10 @@ public class Interaction {
                     vaisseau.getInventaire()[reponse - 1].utiliser(vaisseau);
                     vaisseau.enleverObjet(reponse - 1);
                 }
-                // erreur toujours déclencher
+
                 catch (Exception e){
                     System.out.println("Cet objet n'est pas valide");
-                    System.out.println(e.getStackTrace());
+
                 }
                 break;
 
@@ -53,6 +57,7 @@ public class Interaction {
 
             default:
                 System.out.println("Ceci n'est pas un choix valide.");
+                break;
         }
 
     }
@@ -66,6 +71,7 @@ public class Interaction {
         }
         trajet = "TERRE" + trajet;
         System.out.println(trajet);
+
 
     }
 }

@@ -28,14 +28,14 @@ public enum SystemePlanetaire implements Planete {
     }
 
     @Override
-    // pas oublier declencher game over si pu de gaz avant aller planete
+
     public void explorer(Vaisseau vaisseau) {
             System.out.println("Vous avez dépenser " + fuelrequis + " litres");
             vaisseau.setCarburantRestant(vaisseau.getCarburantRestant() - fuelrequis);
             vaisseau.ajouterObjet(objet);
             System.out.println("Vous avez obtenu : " + objet.getNom());
             System.out.println();
-            if((Math.random() * 3) < 2 ){
+            /*if((Math.random() * 3) < 2 ){
                 int degat = (int)(Math.random() * 50);
                 vaisseau.setPointDeVie(vaisseau.getPointDeVie() - degat );
                 System.out.println("Vous etes attaqués par des pirates.");
@@ -45,7 +45,7 @@ public enum SystemePlanetaire implements Planete {
                     System.out.println("Vous avez peri dans l'attaque.");
                 }
 
-        }
+            }*/
 
 
     }

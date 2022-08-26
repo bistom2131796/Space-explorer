@@ -11,7 +11,10 @@ public class Main {
                 "  \\/_____/   \\/_/     \\/_/\\/_/   \\/_____/   \\/_____/         \\/_____/   \\/_/\\/_/   \\/_/     \\/_____/   \\/_____/   \\/_/ /_/   \\/_____/   \\/_/ /_/ \n" +
                 "                                                                                                                                                 ");
 
-        //ajouter texte
+
+        System.out.println("Bienvenue sur Space explorer.\n" +
+                " Votre mission est de explorer chaque planete du systeme connu sans y laisser votre vie.\n" +
+                " En serez-vous capable?");
         System.out.println();
 
         while (!vaisseau.estMort()){
